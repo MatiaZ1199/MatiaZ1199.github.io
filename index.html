@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4285f4">
+    <title>PWA Auth App</title>
+    <link rel="manifest" href="json/manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>PWA Auth System</h1>
+        </header>
+
+        <div class="auth-form" id="loginForm">
+            <h2>Logowanie</h2>
+            <form id="login">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Hasło" required>
+                <button type="submit">Zaloguj się</button>
+            </form>
+            <p>Nie masz konta? <span onclick="toggleForms()">Zarejestruj się</span></p>
+        </div>
+
+        <div class="auth-form hidden" id="registerForm">
+            <h2>Rejestracja</h2>
+            <form id="register">
+                <input type="text" placeholder="Imię" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Hasło" required>
+                <input type="password" placeholder="Potwierdź hasło" required>
+                <button type="submit">Zarejestruj się</button>
+            </form>
+            <p>Masz już konto? <span onclick="toggleForms()">Zaloguj się</span></p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('js/sw.js')
+                .then(registration => {
+                    console.log('ServiceWorker registered');
+                })
+                .catch(error => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        }
+
+        function toggleForms() {
+            document.getElementById('loginForm').classList.toggle('hidden');
+            document.getElementById('registerForm').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
+
+
